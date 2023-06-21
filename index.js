@@ -1,5 +1,6 @@
 const form = document.querySelector('.comments-form');
 const commentsContainer = document.querySelector('.comments-container');
+const loadingSpinner = document.querySelector('.loading-spinner');
 
 form.comment.value = localStorage.getItem('text-area-comment') ?? '';
 
@@ -68,4 +69,5 @@ fetch('https://dummyjson.com/comments/?limit=3')
         if (!json || !json.comments) return;
         renderComments(json.comments);
     })
-    .catch(console.log);
+    .catch(console.log)
+    .finally(() => loadingSpinner.style.display = 'none');
